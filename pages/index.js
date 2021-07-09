@@ -1,8 +1,8 @@
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { gql, request } from "graphql-request";
 import { SimpleGrid } from "@chakra-ui/react";
 
-import Pokemon from "../components/Pokemon";
+import PokemonCard from "../components/PokemonCard";
 
 const useAllPokemon = () =>
   useQuery("allPokemon", async () => {
@@ -29,17 +29,17 @@ const useAllPokemon = () =>
   });
 
 const IndexPage = () => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { data, isLoading, isError, error } = useAllPokemon();
 
   if (isLoading) return "loading";
-  if (isError) return "error";
+  if (isError) return <p>{{ error }}</p>;
 
   return (
     <div>
-      <SimpleGrid minChildWidth="300px" spacing={10}>
+      <SimpleGrid minChildWidth="300px" spacing={6}>
         {data.pokemon.map((pokemon) => (
-          <Pokemon key={pokemon.id} pokemon={pokemon} />
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       </SimpleGrid>
     </div>

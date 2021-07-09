@@ -1,0 +1,8 @@
+schema: https://beta.pokeapi.co/graphql/v1beta
+documents: "graphql/**/*.gql"
+generates:
+  ./src/types.d.ts:
+    plugins:
+      -
+    config:
+      - withHooks: true
